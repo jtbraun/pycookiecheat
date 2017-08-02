@@ -235,8 +235,9 @@ def generate_host_keys(hostname: str) -> Iterator[str]:
     .foo.example.com
 
     """
+    min_components = 2 if '.' in hostname else 1
     labels = hostname.split('.')
-    for i in range(2, len(labels) + 1):
+    for i in range(min_components, len(labels) + 1):
         domain = '.'.join(labels[-i:])
         yield domain
         yield '.' + domain
